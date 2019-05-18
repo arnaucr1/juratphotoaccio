@@ -21,7 +21,10 @@
 										extract($fila);
 										$id_soci = $id;
 										$social_usu = $social;
+										$estat = $actiu;
 								}
+								if($actiu == "1"){	
+
 								if($social_usu == 1){
 									$social_usu = "A <i class='fas fa-star'></i>";
 									$concurs = selectConcursA();
@@ -105,17 +108,17 @@
 												
 												if($estat == 1){
 												if($participat == 1){ echo'
-												<td  class="text-center"><button type="button" class="btn btn-danger inhabilitat btn-rodo">Completat</button></td>
+											
 													';} else{
+														
+													}}else{
 														echo '
-														<form action="../participa/index.php" method="post">
+														<form action="../puntuar/index.php" method="post">
 														<input type="hidden" name="idconcurs" value="'.$id.'" id="idconcurs"/>
-														<td  class="text-center"><button type="submit" class="btn btn-primary btn-rodo">Participar</button></td>
+														<td  class="text-center"><button type="submit" class="btn btn-primary btn-rodo">Puntuar</button></td>
 														
 														</form>
 														';
-													}}else{
-														echo'<span class="badge badge-pill badge-danger"><?php echo $social_usu; ?></span> <td  class="text-center"><button type="button" class="btn btn-dark inhabilitat btn-rodo">Tancat</button></td>';	
 													} echo'
 												</tr>	
 											';
@@ -123,7 +126,52 @@
 										?>
 										</tbody></table></div> 
 
-										<?php }										
+										<?php }else{
+											?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>PhotoAcció 🏆 Classificacions</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="imagenes/blue-camera.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<!--===============================================================================================-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		
+<!--===============================================================================================-->
+
+<body>
+<div class="container h-100">
+    <div class="row align-items-center h-100">
+        <div class="col-6 mx-auto">
+            <div class="jumbotron" style="border-radius:16px;">
+				<form  method="post" action="">
+				<h1 class="text-center titol">⏳ Esperant activació</h1>
+				<h6 class="text-center">Gràcies per la teva paciència.</h6> 
+					
+				
+				</form>
+				
+			</div>
+			
+	</div>
+    </div>
+</div>
+
+</body>
+</html>
+
+<?php
+										}
+							}										
 									}else{
 										print "<script>window.location='../';</script>";
 									}
