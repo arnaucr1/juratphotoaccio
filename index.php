@@ -37,7 +37,7 @@ if(!empty($_POST)){
             <div class="jumbotron" style="border-radius:16px;">
 				<form  method="post" action="">
 				<h1 class="text-center titol">🏆 Classificacions</h1>
-				<h6 class="text-center">Versió 1.0</h6> 
+				<h6 class="text-center">Versió 1.1</h6> 
 					<div class="form-group">
 					<label for="exampleInputEmail1"><b>Correu electrònic</b></label>
 						<input  class="form-control btn-rodo"  type="email" id="username" name="username" placeholder="Escriu el teu correu electrònic" required>
