@@ -23,6 +23,13 @@ function insertar_participacio($socis_id, $concurs_id, $participat){
     desconectar($con);
     return $resultado;
  }
+ function insertar_puntuacio($id_concurs, $id_soci, $idfoto, $puntuacio3){
+    $con = conectar("root");
+    $registrar = "INSERT INTO valoracions (id_concurs, id_jurat, id_foto, puntuacio) VALUES ($id_concurs, $id_soci, $idfoto, $puntuacio3) ON DUPLICATE KEY UPDATE puntuacio=$puntuacio3 ";
+    $resultado = mysqli_query($con, $registrar);
+    desconectar($con);
+    return $resultado;
+ }
 function updateutf($idu){
     $conexion = conectar($idu);
     $insert = "UPDATE socis SET nom = CONVERT(BINARY CONVERT(nom USING latin1) USING utf8) where id = $idu"; 

@@ -1,12 +1,13 @@
 <html>
 	<head>
-	<title>PhotoAcció 🏆 Classificacions</title>
+	<title>Jurat PhotoAcció </title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="../imagenes/blue-camera.png"/>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/generic.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:500&display=swap" rel="stylesheet">
 	</head>
 	<?php
 					include "../php/bbdd.php";
@@ -49,8 +50,7 @@
 									?>
 		<body>
 			<nav class="navbar navbar-expand-lg  dark-nav">
-			<a class="navbar-brand text-black googlesans" >
-				 🏆 Classificacions </a>
+			<a class="navbar-brand text-black googlesans" > 🏆 Jurat PhotoAcció  </a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -59,22 +59,23 @@
 						<li class="nav-item">
 						</li>
 					</ul>
-					 		<a href="../cerrar_sesion.php" class="btn btn-info btn-rodo" ><i class="fas fa-sign-out-alt"></i> Tancar Sessió </a>	
+					<span class='badge  btn-rodo badge-light' style="font-size:16px;">Si tens dubtes o problemes pots contactar al WhatsApp 616 57 27 81 o web@afr.cat</span>		 		<a href="../cerrar_sesion.php" class="btn btn-info btn-rodo" ><i class="fas fa-sign-out-alt"></i> Tancar Sessió </a>	
 				</div>
 			</nav>
 			<div class="tot">			
 									<div class="container"> 
 									<?php echo '<h1 class="titol googlesans">'. $momentdia.' '.utf8_encode ($nom).'</h1>'; ?>
 									<br><div class="btn btn-primary" style="pointer-events:none;">
-									Codi jurat: <span class="badge badge-light"><?php echo $id_soci; ?> </span>
+									Codi jurat: <span class="badge badge-light"><?php echo $id_soci; ?> </span>	
 									</div>
 									<br><br> 
 									<table class="table table-striped ">
 											<thead>
 												<tr>
-												<th scope="col"><span class="badge badge-concurs btn-rodo txt-concrs"><i class="fas fa-medal"></i> Concursos</span> </th>
+												<th scope="col"><span class="badge badge-concurs btn-rodo txt-concrs"><i class="fas fa-medal"></i> Concurs</span> </th>
 												<th scope="col"><span class="badge btn-rodo txt-concrs">Tema</span> </th>
-											
+												<th scope="col"><span class="badge btn-rodo txt-concrs">Total fotos*</span> </th>
+												<th scope="col"><span class="badge btn-rodo txt-concrs">Has puntuat**</span> </th>
 												<th scope="col"  class="text-center"><span class="badge  btn-rodo txt-concrs"><i class="fas fa-book"></i> Bases</span></th>
 												<th scope="col" class="text-center"></th>
 												</tr>
@@ -86,6 +87,23 @@
 												extract($fila);
 												$id_concurs = $id;
 												$participat = NULL;
+
+										$conexion2 = conectar();
+										$query2 = "SELECT count(*) as total FROM valoracions where id_concurs=$id_concurs and id_jurat=$id_soci ";
+										$query_searched2 = mysqli_query($conexion2,$query2);
+										$count_results2 = mysqli_num_rows($query_searched2);
+										while ($row_searched2 = mysqli_fetch_array($query_searched2)) {
+											$foto_puntuades = $row_searched2['total'];
+											
+										}
+										$conexion3 = conectar();
+										$query3 = "SELECT count(*) as total2 FROM participacions where concurs_id=$id_concurs ";
+										$query_searched3 = mysqli_query($conexion3,$query3);
+										$count_results3 = mysqli_num_rows($query_searched3);
+										while ($row_searched3 = mysqli_fetch_array($query_searched3)) {
+											$per_puntuar = $row_searched3['total2'];
+											
+										}
 										$activity2 = selectParticipat($id_soci, $id_concurs);
 										while ($fila2 = mysqli_fetch_assoc($activity2)) {
 												extract($fila2);
@@ -103,6 +121,8 @@
 												<tr>
 												<td> '.utf8_encode ($nom).' <span class="badge badge-pill badge-danger">'.$tipus.'</span> </td>
 												<td> '.utf8_encode ($tema).' </td>
+												<td  class="text-center"><a href="'.utf8_encode ($bases).'"style="font-size:20px;" class="badge badge-info btn-rodo" target="_blank">'.$per_puntuar.'</a></td>
+												<td  class="text-center"><a href="'.utf8_encode ($bases).'" style="font-size:20px;" class="badge badge-info btn-rodo" target="_blank">'.$foto_puntuades.'</a></td>
 												<td  class="text-center"><a href="'.utf8_encode ($bases).'" class="badge badge-success btn-rodo" target="_blank">Consultar bases</a></td>
 												'; 
 												
@@ -124,7 +144,9 @@
 											';
 										}	
 										?>
-										</tbody></table></div> 
+										</tbody></table>
+										<span class='badge  btn-rodo badge-light' style="font-size:16px;">*Fotografies totals del concurs per puntuar. **Fotografies totals que has puntuat (has de puntuar totes).</span>
+									</div> 
 
 										<?php }else{
 											?>
@@ -154,8 +176,8 @@
         <div class="col-6 mx-auto">
             <div class="jumbotron" style="border-radius:16px;">
 				<form  method="post" action="">
-				<h1 class="text-center titol">⏳ Esperant activació</h1>
-				<h6 class="text-center">Gràcies per la teva paciència.</h6> 
+				<h1 class="text-center titol">Compte desactivat</h1>
+				<h6 class="text-center">No tens cap concurs asignat.</h6> 
 					
 				
 				</form>
@@ -165,7 +187,6 @@
 	</div>
     </div>
 </div>
-
 </body>
 </html>
 

@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<title>PhotoAcció 🏆 Classificacions</title>
+	<title>Classificacions</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -27,7 +27,7 @@
         <div class="col-6 mx-auto">
             <div class="jumbotron" style="border-radius:16px;">
 				<form  method="post" action="">
-				<h1 class="text-center titol">🏆 Classificacions</h1>
+				<h1 class="text-center titol">🏆 Jurat PhotoAcció </h1>
 				<h6 class="text-center">Versió 1.1</h6> 
 					<div class="form-group">
 					<label for="exampleInputEmail1"><b>Correu electrònic</b></label>
